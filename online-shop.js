@@ -18,4 +18,24 @@ class OnlineShop {
             }
         }
     }
+
+    quantityCheck(product, minimalQuantity) {
+        if (!this.products.find(x => x.product === product)) {
+            throw new Error(`There is no ${product} in the warehouse.`);
+        }
+
+        if (Number(minimalQuantity) <= 0) {
+            throw new Error("The quantity cannot be zero or negative.");
+        } else {
+            let productElement = this.products.find(x => x.product === product);
+
+            if (Number(minimalQuantity) <= Number(productElement.quantity)) {
+                return `You have enough from product ${product}.`;
+            } else {
+                let result = Number(minimalQuantity) - Number(productElement.quantity);
+                productElement.quantity = Number(minimalQuantity);
+                return `You added ${result} more from the ${product} products.`;
+            }
+        }
+    }
 }
