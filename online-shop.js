@@ -38,4 +38,18 @@ class OnlineShop {
             }
         }
     }
+
+    sellProduct(product) {
+        if (!this.products.find(x => x.product === product)) {
+            throw new Error(`There is no ${product} in the warehouse.`);
+        } else {
+            let productElement = this.products.find(x => x.product === product);
+            let index = this.products.indexOf(productElement);
+            let newQuantity = Number(productElement.quantity) - 1;
+            let newProduct = { product: productElement.product, quantity: newQuantity };
+            this.products.splice(index, 1, newProduct);
+            this.sales.push(newProduct);
+            return `The ${product} has been successfully sold.`;
+        }
+    }
 }
