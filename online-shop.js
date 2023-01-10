@@ -52,4 +52,13 @@ class OnlineShop {
             return `The ${product} has been successfully sold.`;
         }
     }
+
+    revision() {
+        if (this.sales.length === 0) {
+            throw new Error("There are no sales today!");
+        } else {
+            let mapped = this.products.map(x => `${x.product}-${x.quantity} more left`);
+            return `You sold ${this.sales.length} products today! \n Products in the warehouse: \n ${mapped.join('\n')}`;
+        }
+    }
 }
