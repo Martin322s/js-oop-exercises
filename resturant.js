@@ -67,4 +67,30 @@ class Restaurant {
 
         return stringArr.join('\n');
     }
+
+    makeTheOrder(meal) {
+        if (!this.menu.hasOwnProperty(meal)) {
+            return `There is not ${meal} yet in our menu, do you want to order something else?`;
+        }
+
+        for (let meal in this.menu) {
+            let products = this.menu[meal].products;
+            for (let [product, quantity] of products) {
+                if (!this.stockProducts.hasOwnProperty(product)) {
+                    return `For the time being, we cannot complete your order (${meal}), we are very sorry...`;
+                }
+
+                if (this.stockProducts[product] < quantity) {
+                    return `For the time being, we cannot complete your order (${meal}), we are very sorry...`;
+                }
+            }
+
+            products.forEach(([product, quantity]) => {
+                this.stockProducts[product] - quantity;
+            });
+
+            this.budgetMoney += this.menu[meal].price;
+            return `Your order (${meal}) will be completed in the next 30 minutes and will cost you ${this.menu[meal].price}.`;
+        }
+    }
 }
