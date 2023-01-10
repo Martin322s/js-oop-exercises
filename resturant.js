@@ -51,4 +51,20 @@ class Restaurant {
         }
 
     }
+
+    showTheMenu() {
+        let menuEntries = Object.entries(this.menu);
+        let mealCount = menuEntries.length;
+
+        if (!mealCount) {
+            return 'Our menu is not ready yet, please come later...';
+        }
+
+        let stringArr = [];
+        for (let [meal, mealInfoObj] of menuEntries) {
+            stringArr.push(`${meal} - $ ${mealInfoObj.price}`);
+        }
+
+        return stringArr.join('\n');
+    }
 }
