@@ -27,4 +27,28 @@ class Restaurant {
 
         return this.history.join('\n');
     }
+
+    addToMenu(meal, productArr, price) {
+        let neededProducts = [];
+
+        for (let strSequence of productArr) {
+            let [product, quantity] = strSequence.split(' ');
+            quantity = Number(quantity);
+
+            neededProducts.push([product, quantity]);
+        }
+
+        if (this.menu.hasOwnProperty(meal)) {
+            return `The ${meal} is already in the our menu, try something different.`;
+        }
+        this.menu[meal] = { products: neededProducts, price };
+        let mealCount = Object.keys(this.menu).length;
+
+        if (mealCount == 1) {
+            return `Great idea! Now with the ${meal} we have 1 meal in the menu, other ideas?`;
+        } else if (!mealCount || mealCount >= 2) {
+            return `Great idea! Now with the ${meal} we have ${mealCount} meals in the menu, other ideas?`;
+        }
+
+    }
 }
