@@ -42,4 +42,35 @@ class LibraryCollection {
 
         return `${bookName} remove from the collection.`;
     }
+
+    getStatistics(bookAuthor) {
+        if (!bookAuthor) {
+            const log = [];
+            log.push(`The book collection has ${this.capacity - this.books.length} empty spots left.`);
+            if (this.books.length) {
+                const sorted = this.books.sort((a, b) => a.bookName.localeCompare(b.bookName));
+                for (const book of sorted) {
+                    log.push(`${book.bookName} == ${book.bookAuthor} - ${book.payed ? 'Has Paid' : 'Not Paid'}.`);
+                }
+
+                return log.join('\n');
+            }
+
+            return '';
+        }
+
+        const authorBooks = this.books.filter(book => book.bookAuthor === bookAuthor);
+
+        if (!authorBooks.length) {
+            throw Error(`${bookAuthor} is not in the collection.`);
+        }
+
+        const log = [];
+
+        for (const book of authorBooks) {
+            log.push(`${book.bookName} == ${book.bookAuthor} - ${book.payed ? 'Has Paid' : 'Not Paid'}.`);
+        }
+
+        return log.join('\n');
+    }
 }
