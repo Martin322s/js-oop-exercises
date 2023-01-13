@@ -81,4 +81,12 @@ class SummerCamp {
             return `The ${participant1} successfully completed the game Battleship.`;
         }
     }
+
+    toString() {
+        let message1 = `${this.organizer} will take ${this.listOfParticipants.length} participants on camping to ${this.location}\n`;
+        this.listOfParticipants.sort((a, b) => b.wins - a.wins);
+        let allParticipants = this.listOfParticipants.map(el => `${el.name} - ${el.condition} - ${el.power} - ${el.wins}`).join('\n');
+
+        return message1 += allParticipants;
+    }
 }
