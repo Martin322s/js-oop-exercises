@@ -27,4 +27,17 @@ class SummerCamp {
 
         return `The ${name} was successfully registered.`;
     }
+
+    unregisterParticipant(name) {
+        let currentParticipant = this.listOfParticipants.find(el => el.name === name);
+
+        if (!currentParticipant) {
+            throw new Error(`The ${name} is not registered in the camp.`);
+
+        }
+        let index = this.listOfParticipants.indexOf(currentParticipant);
+        this.listOfParticipants.splice(index, 1);
+
+        return `The ${name} removed successfully.`
+    }
 }
