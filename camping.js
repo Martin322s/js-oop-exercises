@@ -40,4 +40,45 @@ class SummerCamp {
 
         return `The ${name} removed successfully.`
     }
+
+    timeToPlay(typeOfGame, participant1, participant2) {
+        let person1 = this.listOfParticipants.find(el => el.name === participant1);
+
+        if (typeOfGame === 'WaterBalloonFights') {
+            let person2 = this.listOfParticipants.find(el => el.name === participant2);
+
+            if (!person1 || !person2) {
+                throw new Error('Invalid entered name/s.');
+            }
+
+            if (person1.condition !== person2.condition) {
+                throw new Error('Choose players with equal condition.');
+            }
+
+            let currentWinner = ''
+
+            if (person1.power > person2.power) {
+                person1.wins++;
+                currentWinner = person1.name;
+
+            } else if (person2.power > person1.power) {
+                person2.wins++;
+                currentWinner = person2.name;
+
+            } else {
+                return `There is no winner.`;
+            }
+
+            return `The ${currentWinner} is winner in the game WaterBalloonFights.`;
+
+        } else if (typeOfGame === 'Battleship') {
+
+            if (!person1) {
+                throw new Error(`Invalid entered name/s.`);
+            }
+            person1.power += 20;
+
+            return `The ${participant1} successfully completed the game Battleship.`;
+        }
+    }
 }
