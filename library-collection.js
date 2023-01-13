@@ -13,4 +13,18 @@ class LibraryCollection {
 
         return `The ${bookName}, with an author ${bookAuthor}, collect.`;
     }
+
+    payBook(bookName) {
+        const bookToPay = this.books.find(book => book.bookName === bookName);
+        if (!bookToPay) {
+            throw Error(`${bookName} is not in the collection.`);
+        }
+
+        if (bookToPay.payed) {
+            throw Error(`${bookName} has already been paid.`);
+        }
+
+        bookToPay.payed = true;
+        return `${bookName} has been successfully paid.`;
+    }
 }
