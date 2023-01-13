@@ -47,3 +47,22 @@ Functionality:
 - showTheMenu(): This method just return all meals from our menu separated by a new line in format: {meal} - {meal price}. If our menu is empty, just return the message: "Our menu is not ready yet, please come later..."
 
 - makeTheOrder(): Accept 1 argument meal (string). This method searches the menu for a certain meal. If we do not have the given meal, return the following message: "There is not {meal} yet in our menu, do you want to order something else?", otherwise, if we have this meal in the menu, we need to check, if we have the needed products to make it! If we have this meal in the menu and also, we have all needed products to make it. You also need to reduce quantity of all used products from those in stock and add the price of the meal to the total budget.
+
+4. Online - shop
+
+-Functionality:
+
+Constructor have these 3 properties: warehouseSpace – Number, products – Array (empty), sales – Array (empty). At the initialization of the OnlineShop class, the constructor accepts the warehouseSpace.
+
+- loadingStore(product, quantity, spaceRequired): The product is of type string, while the spaceRequired and quantity are of type number. If there is not enough space in the warehouse for the new product, error will be thrown. Otherwise, this function will add the product with the properties: product and quantity to the products array, with reduced space available with the space required by the product.
+
+NOTE: Product names will be unique.
+
+- quantityCheck(product, minimalQuantity): The quantity is of type number. If the product is not found, error will be thrown,
+if the received minimalQuantity is less than or equal to 0, error will be thrown, if the received minimalQuantity is less or equal to the product quantity in the warehouse, message will be returned. Otherwise, this function will replace the value of product quantity with a minimalQuantity value and return: "You added {difference} more from the {product} products."
+(Difference is the number between the minimum quantity and the product quantity.)
+
+- sellProduct(product): If the product is not found, error will be thrown. Otherwise, this function will decrement by 1 the product quantity from the product in the products array, add it to sales with properties {product} and {1} for quantity, and return: "The {product} has been successfully sold."
+
+- revision()
+This method will return the complete information about the shop: If nothing is sold, error will be thrown, otherwise, return how many sales you have: "You sold {sales} products today!", on the second line: "Products in the warehouse:" and on the new line, display information about each product in the warehouse: "{product}-{quantity} more left";
