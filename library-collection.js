@@ -27,4 +27,19 @@ class LibraryCollection {
         bookToPay.payed = true;
         return `${bookName} has been successfully paid.`;
     }
+
+    removeBook(bookName) {
+        const index = this.books.findIndex(book => book.bookName === bookName);
+        if (index === -1) {
+            throw Error('The book, you\'re looking for, is not found.');
+        }
+
+        if (!this.books[index].payed) {
+            throw Error(`${bookName} need to be paid before removing from the collection.`);
+        }
+
+        this.books.splice(index, 1);
+
+        return `${bookName} remove from the collection.`;
+    }
 }
