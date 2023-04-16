@@ -44,4 +44,27 @@ class WineSelection {
         this.wines.splice(wineIndex, 1);
         return `You drank a bottle of ${wineName}.`;
     }
+
+    cellarRevision(wineType) {
+        const filteredWines = wineType
+            ? this.wines.filter((w) => w.wineType === wineType)
+            : this.wines;
+        const emptySlots = this.space - this.wines.length;
+        let result = `You have space for ${emptySlots} bottles more.\n`;
+        result += `You paid ${this.bill}$ for the wine.\n`;
+        filteredWines.sort((a, b) => a.wineName.localeCompare(b.wineName));
+        if (filteredWines.length === 0) {
+            result += "The cellar is empty.";
+        } else {
+            result += filteredWines
+                .map(
+                    (w) => `${w.wineName} > ${w.wineType} - ${w.paid ? "Paid" : "Not Paid"}.`
+                )
+                .join("\n");
+        }
+        if (wineType && filteredWines.length === 0) {
+            throw new Error(`There is no ${wineType} in the cellar.`);
+        }
+        return result;
+    }
 };
