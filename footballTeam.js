@@ -23,4 +23,20 @@ class FootballTeam {
         const message = `You successfully invite ${newInvites.join(', ')}.`;
         return message;
     }
+
+    signContract(selectedPlayer) {
+        const [name, playerOffer] = selectedPlayer.split('/');
+        const index = this.invitedPlayers.findIndex(p => p.name === name);
+        if (index === -1) {
+            throw new Error(`${name} is not invited to the selection list!`);
+        }
+        const player = this.invitedPlayers[index];
+        if (playerOffer < player.playerValue) {
+            const priceDifference = player.playerValue - playerOffer;
+            throw new Error(`The manager's offer is not enough to sign a contract with ${name}, ${priceDifference} million more are needed to sign the contract!`);
+        }
+        player.playerValue = 'Bought';
+        const message = `Congratulations! You sign a contract with ${name} for ${playerOffer} million dollars.`;
+        return message;
+    }
 };
