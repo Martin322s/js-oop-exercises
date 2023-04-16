@@ -58,4 +58,10 @@ class FootballTeam {
         const message = `${name} is above age limit!`;
         return message;
     }
+
+    transferWindowResult() {
+        const players = this.invitedPlayers.map(p => `Player ${p.name}-${p.playerValue}`).sort();
+        const message = ['Players list:', ...players].join('\n');
+        return message;
+    }
 };
