@@ -31,4 +31,17 @@ class WineSelection {
         this.bill += price;
         return `You bought a ${wineName} for ${price}$.`;
     }
+
+    openBottle(wineName) {
+        const wineIndex = this.wines.findIndex((w) => w.wineName === wineName);
+        if (wineIndex === -1) {
+            throw new Error(`The wine, you're looking for, is not found.`);
+        }
+        const wine = this.wines[wineIndex];
+        if (!wine.paid) {
+            throw new Error(`${wineName} need to be paid before open the bottle.`);
+        }
+        this.wines.splice(wineIndex, 1);
+        return `You drank a bottle of ${wineName}.`;
+    }
 };
