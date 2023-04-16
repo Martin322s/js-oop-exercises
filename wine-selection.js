@@ -20,7 +20,7 @@ class WineSelection {
     }
 
     payWineBottle(wineName, price) {
-        const wine = this.wines.find((w) => w.wineName === wineName);
+        let wine = this.wines.find((w) => w.wineName === wineName);
         if (!wine) {
             throw new Error(`${wineName} is not in the cellar.`);
         }
@@ -29,7 +29,7 @@ class WineSelection {
         }
         wine.paid = true;
         this.bill += price;
-        return `You bought a ${wineName} for ${price}$.`;
+        return `You bought a ${wineName} for a ${price}$.`;
     }
 
     openBottle(wineName) {
